@@ -1,0 +1,650 @@
+body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+#title {
+    text-align: center;
+    background-color: #6c8cb7;
+    color: #ffffff;
+    padding: 30px 0;
+    margin-bottom: 20px;
+    box-shadow: 0px 8px 17px 1px rgba(0, 0, 0, 0.2);
+}
+
+/* En-tête */
+.header-container {
+    display: flex;
+    flex-direction: column; /* Alignement vertical pour intégrer logo + boutons */
+    align-items: center; /* Centrer les éléments horizontalement */
+    justify-content: top;
+    background-color: var(--xplorer-color);
+    padding: var(--spacing-small) var(--spacing-medium);
+    border-bottom: 2px solid rgba(0, 0, 0, 0.1); /* Ligne de séparation */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Ombre subtile */
+    transition: height 0.3s ease;
+    height:170px;
+}
+
+.logo {
+    height: 80px;
+    max-width: 100%;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: 1fr 750px; /* Colonne de gauche et colonne de droite */
+    grid-template-rows: auto 2fr; /* Ligne pour le contenu en haut et une autre pour les résultats en bas */
+    grid-template-areas: 
+        "recherche ProgrammeMag"
+        "resultats resultats"; /* Les résultats occupent toute la largeur en bas */
+    gap: 20px;
+    max-width: 1300px; /* Largeur totale du conteneur */
+    margin: 40px auto;
+    padding: 20px;
+    background: var(--container);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+#recherche {
+    grid-area: recherche; /* Zone de la grille pour la recherche */
+}
+
+#ProgrammeMag {
+    grid-area: ProgrammeMag; /* Zone de la grille pour le programme Mag */
+    width: 100%;
+}
+
+.Explorer{
+    margin-bottom: 20px;
+    border-radius: 6px;
+    background-color: #6c8cb7;
+    box-shadow: 0px 8px 17px 1px rgba(0, 0, 0, 0.3);
+}
+
+.ProgrammeMag {
+    margin-bottom: 20px;
+    border-radius: 6px;
+    background-color: #88989D;
+    box-shadow: 0px 8px 17px 1px rgba(0, 0, 0, 0.3);
+}
+
+#resultats {
+    grid-area: resultats; /* Zone de la grille pour les résultats */
+    grid-column: span 2; /* Occuper les deux colonnes */
+}
+
+h1 {
+    grid-column: span 2; /* Occuper les deux colonnes */
+}
+
+h2 {
+    text-align: left;
+    color: #fff;
+    font-weight: 700;
+    margin-bottom: 35px;
+    padding: 15px;
+    
+}
+
+.file-upload-label {
+    padding: 10px 20px;
+    background-color: #dc3545;
+    color: white !important;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    display: inline-block;
+    transition: background-color 0.3s;
+    margin-right: 10px;
+}
+
+.file-upload-label.uploaded {
+    background-color: #28a745;
+}
+
+.form-group {
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+label {
+    font-weight: 500;
+    margin-bottom: 5px;
+    color: var(--text-color);
+}
+
+input[type="text"],
+input[type="time"],
+select {
+    width: 100%;
+    max-width: 300px;
+    padding: 8px 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    color: #333;
+}
+
+button#searchBtn {
+    background-color: #004aad;
+    color: white;
+    margin-right: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+button#downloadBtn {
+    background-color: #28a745;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 20px;
+}
+
+button#visualizeBtn {
+    background-color: #ff9800;
+    color: white;
+    display: none;
+}
+
+button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.btn-group {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.comparebtn {
+    background-color: #28a745;  /* Vert pour indiquer une action positive */
+    color: white;  /* Texte en blanc */
+    padding: 10px 20px;  /* Espacement interne pour agrandir le bouton */
+    border: none;  /* Supprimer la bordure par défaut */
+    border-radius: 4px;  /* Arrondir les coins */
+    cursor: pointer;  /* Changer le curseur au survol pour indiquer une action cliquable */
+    font-size: 16px;  /* Taille du texte */
+    font-weight: bold;  /* Mettre le texte en gras */
+    transition: background-color 0.3s ease;  /* Ajouter une transition pour l'effet au survol */
+    margin-top: 20px; /* Espacement au-dessus du bouton */
+    display: inline-block; /* Assure une bonne mise en forme du bouton */
+}
+
+/* Effet au survol */
+.comparebtn:hover {
+    background-color: #218838;  /* Couleur légèrement plus foncée au survol */
+}
+
+/* Effet lors du clic */
+.comparebtn:active {
+    background-color: #1e7e34;  /* Couleur encore plus foncée lors du clic */
+}
+
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: var(--th-xplorer-color);
+    font-weight: 500;
+}
+
+/* Pied de page */
+footer {
+    background-color: var(--xplorer-color);
+    color: #fff;
+    padding: var(--spacing-medium);
+    text-align: center;
+}
+
+#timelineContainer {
+    margin-top: 20px;
+    display: none;
+    grid-column: span 2; /* Occuper les deux colonnes */
+}
+
+.day-group {
+    margin-bottom: 20px;
+}
+
+.event-group {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-bottom: 5px;
+    background-color: #f8f8f8;
+}
+
+.event-time {
+    font-weight: bold;
+}
+
+.event-title {
+    color: #555;
+}
+
+.xmlcontainer {
+    max-width: 1350px; /* Limite la largeur maximale à 1000px */
+    margin: 0 auto; /* Centre le conteneur */
+    padding: 20px;
+    box-sizing: border-box;
+    margin: 40px auto;
+    padding: 20px;
+    background: var(--xmlcontainer);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+#analyseXML {
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    margin-top: 20px; /* Ajoute un espace entre les sections */
+}
+
+#resultsContainer {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap; /* Permet d'ajuster en fonction de la largeur disponible */
+}
+
+#resultsColumn1, #resultsColumn2 {
+    width: 48%;
+}
+
+.duration-blue {
+    color: blue;
+}
+
+.duration-red {
+    color: red;
+}
+
+/* Styles pour les durées des trous */
+.duration-yellow {
+    color: #849500;
+}
+
+.duration-orange {
+    color: orange;
+}
+
+.duration-red {
+    color: red;
+}
+
+.duration-blue {
+    color: blue;
+}
+
+button#updateBtn{
+background-color: #28a745;
+color: white;
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+margin-top: 20px;
+}
+
+/* Styles pour les curseurs de durée */
+input[type="range"] {
+    -webkit-appearance: none; /* Supprime le style par défaut des curseurs */
+    width: 50%; /* Largeur maximale */
+    height: 8px; /* Hauteur de la ligne de curseur */
+    margin: 10px 0;
+    background: #ddd; /* Couleur de fond de la ligne */
+    border-radius: 5px; /* Coins arrondis */
+    outline: none; /* Supprime le contour */
+}
+
+/* Style du curseur */
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none; /* Supprime le style par défaut du curseur */
+    width: 15px; /* Largeur du curseur */
+    height: 15px; /* Hauteur du curseur */
+    background: #4CAF50; /* Couleur du curseur */
+    cursor: pointer; /* Changement de curseur au survol */
+    border-radius: 50%; /* Curseur circulaire */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); /* Ombre légère */
+}
+
+input[type="range"]::-moz-range-thumb {
+    width: 15px;
+    height: 15px;
+    background: #4CAF50;
+    cursor: pointer;
+    border-radius: 50%;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.excluded-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 15px;
+    margin: 8px 0;
+    background-color: var(--background-color);
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.excluded-item label {
+    flex-grow: 1;
+    margin-left: 10px;
+    font-size: 1rem;
+    color: var(--text-color);
+}
+
+.excluded-title-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.excluded-title-item label {
+    margin-left: 8px;
+}
+
+.toggle-switch {
+    width: 40px;
+    height: 20px;
+    position: relative;
+    appearance: none;
+    background: #ccc;
+    outline: none;
+    cursor: pointer;
+    border-radius: 20px;
+    transition: background 0.3s;
+    margin-right: 10px;
+}
+
+.toggle-switch:checked {
+    background: #4caf50;
+}
+
+.toggle-switch::before {
+    content: "";
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 16px;
+    height: 16px;
+    background: #fff;
+    border-radius: 50%;
+    transition: 0.3s;
+}
+
+.toggle-switch:checked::before {
+    left: 22px;
+}
+
+.remove-pair {
+    cursor: pointer;
+    color: #dc3545;
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-left: 10px;
+    transition: color 0.2s ease-in-out;
+}
+
+.remove-pair:hover {
+    color: #ff6b6b;
+    transform: scale(1.2);
+}
+
+#excludedTitlesList {
+    margin-top: 20px;
+    padding: 10px;
+    border: 1px solid #dee2e6;
+    border-radius: 10px;
+    background-color: var(--container);
+    margin-bottom: 10px;
+}
+
+/* Styles supplémentaires pour la compatibilité */
+input[type="range"]::-ms-track {
+    width: 50%;
+    height: 8px;
+    background: transparent;
+    border-color: transparent;
+    color: transparent;
+}
+
+#compareXMLSection {
+    margin-top: 40px;
+}
+
+.compare_container {
+    max-width: 900px; /* Largeur maximale du conteneur */
+    margin: 40px auto; /* Centre le conteneur sur la page */
+    padding: 20px;
+    background-color: var(--container);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column; /* Assure une disposition verticale */
+    align-items: center; /* Centre les éléments horizontalement */
+}
+
+/* Sections dans compare_container */
+.compare_container section {
+    width: 100%; /* Occuper toute la largeur disponible */
+    margin-bottom: 40px;
+}
+
+/* Titres de section dans compare_container */
+.compare_container h2 {
+    text-align: center;
+    color: #333;
+    font-weight: 700;
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #6c8cb7; /* Couleur de fond */
+    color: white; /* Couleur du texte */
+    border-radius: 6px;
+    width: 100%; /* S'assurer que le titre occupe la largeur disponible */
+}
+
+/* Contenu centré dans compare_container */
+.compare_container .analysis-container {
+    text-align: left;
+    margin-top: 100px;
+}
+
+.compare_container .analysis-results {
+    margin: 20px auto;
+    width: 80%; /* Largeur réduite pour centrer le contenu */
+    padding: 20px;
+    background-color: var(--container);
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Boutons spécifiques à Xplorer */
+.btn-primary {
+    background-color: var(--xplorer-color);
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background-color: #5a7694; /* Légèrement plus sombre */
+}
+
+/* Boutons dans compare_container */
+.compare_container .btn-analyze, 
+.compare_container .btn-reset {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.compare_container .btn-analyze {
+    background-color: #004aad;
+    color: white;
+}
+
+.compare_container .btn-reset {
+    background-color: #dc3545;
+    color: white;
+}
+
+.compare_container .btn-analyze:hover {
+    background-color: #003b8d;
+}
+
+.compare_container .btn-reset:hover {
+    background-color: #c82333;
+}
+
+/* Champs éditables dans compare_container */
+.compare_container .editable-area {
+    min-height: 150px;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    background-color: var(--email-preview); 
+    margin-top: 20px;
+    width: 100%; /* S'assurer que les champs occupent toute la largeur */
+}
+
+
+/* Aération des sections de mots-clés et titres exclus */
+#keywordsContainer, #excludedTitlesContainer {
+    margin-top: 20px; /* Espace au-dessus du premier champ */
+}
+
+#keywordsContainer > div,
+#excludedTitlesContainer > div {
+    margin-bottom: 20px; /* Espace entre chaque champ créé */
+}
+
+/* Stylisation des boutons d'ajout */
+button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 10px; /* Espace entre le bouton et le contenu au-dessus */
+}
+
+button:hover {
+    background-color: #ccc;
+}
+
+button:active {
+    background-color: #bbb;
+}
+
+button:focus {
+    outline: none;
+}
+
+/* Style spécifique pour les boutons "Ajouter" */
+button[onclick="addKeywordField()"], 
+button[onclick="addExcludedTitleField()"] {
+    background-color: #28a745; /* Couleur verte pour indiquer l'ajout */
+    color: white;
+    margin-bottom: 20px; /* Espace entre le bouton et le premier champ ajouté */
+}
+
+button[onclick="addKeywordField()"]:hover, 
+button[onclick="addExcludedTitleField()"]:hover {
+    background-color: #218838; /* Couleur plus foncée au survol */
+}
+
+.returnbtn {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.returnbtn button {
+    background-color: #6c757d; /* Gris neutre */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.returnbtn button:hover {
+    background-color: #5a6268;
+}
+
+.returnbtn button:active {
+    background-color: #545b62;
+}
+
+/* Espacement entre le champ et le bouton supprimer */
+.excluded-title-field {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px; /* Espacement entre les champs */
+}
+
+/* Styliser le bouton "Supprimer" en rouge */
+.excluded-title-field button {
+    margin-left: 10px; /* Ajouter de l'espace entre le champ et le bouton */
+    background-color: #dc3545; /* Rouge */
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+/* Effet au survol */
+.excluded-title-field button:hover {
+    background-color: #c82333; /* Rouge plus foncé */
+}
+
+/* Styliser le bouton "Modifier" en bleu */
+.excluded-title-field button:nth-child(2) { /* Cible le deuxième bouton (Modifier) */
+    background-color: #007bff; /* Bleu */
+    margin-left: 10px;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+/* Effet au survol */
+.excluded-title-field button:nth-child(2):hover {
+    background-color: #0056b3; /* Bleu plus foncé */
+}

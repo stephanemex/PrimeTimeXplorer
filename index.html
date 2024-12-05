@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PrimeTimeXplorer</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.dhtmlx.com/gantt/edge/dhtmlxgantt.css">
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.dhtmlx.com/gantt/edge/dhtmlxgantt.js"></script>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <img src="Logo_PrimeTimeXplorer.png" alt="Logo PrimeTime Xplorer" class="logo">
+        </div>
+        <nav class="nav-buttons">
+            <a href="index.html" class="xplorer-nav-btn">Accueil - Xplorer</a>
+            <a href="compare.html" class="xplorer-nav-btn">Comparaison</a>
+            <a href="../PrimeTime-Hub/index.html" class="xplorer-nav-btn">Retour au Hub</a>
+        </nav>
+    </header>
+
+        <!-- Basculeur de thème -->
+        <div id="theme-toggle" class="theme-toggle">
+            <span class="sun">☀️</span>
+            <span class="moon">🌙</span>
+        </div>
+
+    <div class="container">
+        <!-- Conteneur pour la recherche et les filtres -->
+        <div id="recherche">
+            <div class="Explorer"><h2>Explorateur de programme</h2></div>
+            <div class="drop-area" id="dropArea">
+                <label for="uploadSearch" class="file-upload-label" id="fileLabelSearch">Charger le Programme</label>
+                <input type="file" id="uploadSearch" class="upload" style="display: none;" accept=".xlsx, .xls, .xml">
+            </div>
+
+            <!-- Champs de recherche et filtres -->
+            <div class="form-group">
+                <label for="searchString">Rechercher un texte :</label>
+                <input type="text" id="searchString" placeholder="Entrez un mot clé">
+            </div>
+
+            <div class="form-group">
+                <label for="searchDate">Filtrer par jour :</label>
+                <select id="searchDate"></select>
+            </div>
+
+            <div class="form-group">
+                <label for="startTime">Heure de début :</label>
+                <input type="time" id="startTime">
+            </div>
+
+            <div class="form-group">
+                <label for="endTime">Heure de fin :</label>
+                <input type="time" id="endTime">
+            </div>
+
+            <!-- Boutons d'action -->
+            <div class="btn-group">
+                <button id="searchBtn">Rechercher</button>
+                <button id="downloadBtn" disabled>Télécharger les résultats</button>
+                <button id="visualizeBtn">Visualiser le Programme</button>
+            </div>
+        </div>
+
+        <!-- Conteneur pour le bouton et l'affichage des programmes en PrimeTime du jour -->
+        <div id="ProgrammeMag">
+            <div class="ProgrammeMag"><h2>Programmes de la soirée</h2></div>
+            <div class="drop-area" id="dropAreaMag">
+                <label for="uploadMag" class="file-upload-label" id="fileLabelMag">Charger programme Mag</label>
+                <input type="file" id="uploadMag" class="upload" style="display: none;" accept=".xlsx, .xls">
+            </div>
+
+            <div id="magSchedule">
+                <!-- Les émissions du programme Mag pour aujourd'hui seront affichées ici -->
+            </div>
+        </div>
+
+        <!-- Tableau pour afficher les résultats de recherche -->
+        <div id="resultats">
+            <table id="resultsTable">
+                <thead></thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Début de la section analyse XML -->
+    <div id="analyseXML" class="xmlcontainer">
+        <div class="Explorer"><h2>Analyse des fichiers XML</h2></div>
+        <div class="drop-area" id="dropAreaXml">
+            <label for="uploadXml" class="file-upload-label" id="fileLabelXml">Charger le fichier XML</label>
+            <input type="file" id="uploadXml" class="upload" style="display: none;" accept=".xml">
+            <input type="hidden" id="xmlBackup" value="">
+        </div>
+
+        <!-- Curseurs pour les durées minimales des trous et des chevauchements -->
+        <div class="form-group">
+            <label for="overlapDuration">Durée minimum pour les chevauchements (minutes):</label>
+            <input type="range" id="overlapDuration" min="1" max="60" value="4">
+            <span id="overlapValue">4 min</span>
+        </div>
+
+        <div class="form-group">
+            <label for="gapDuration">Durée minimum pour les trous (minutes):</label>
+            <input type="range" id="gapDuration" min="1" max="60" value="12">
+            <span id="gapValue">12 min</span>
+        </div>
+
+        <!-- Bouton pour appliquer les changements des curseurs -->
+        <button id="updateBtn">OK</button>
+
+        <div class="form-group">
+            <label>Exclusions :</label>
+            <div id="excludedTitlesList">
+                <div class="excluded-item">
+                    <input type="checkbox" id="toggle_Example1_Example2" checked class="toggle-switch">
+                    <label for="toggle_Example1_Example2">Example1, Example2</label>
+                    <span class="remove-pair" data-pair="Example1,Example2">&times;</span>
+                </div>
+                <div class="excluded-item">
+                    <input type="checkbox" id="toggle_Example3_Example4" checked class="toggle-switch">
+                    <label for="toggle_Example3_Example4">Example3, Example4</label>
+                    <span class="remove-pair" data-pair="Example3,Example4">&times;</span>
+                </div>
+            </div>
+            <input type="text" id="newExclusion" placeholder="Titre 1, Titre 2">
+            <button id="addExclusionBtn" class="comparebtn">Ajouter</button>
+        </div>
+        
+        <!-- Conteneur pour afficher les résultats -->
+        <div id="resultsContainer">
+            <div id="resultsColumn1">
+                <h3>Chevauchements détectés :</h3>
+                <table id="overlapResultsTable">
+                    <thead>
+                        <tr>
+                            <th>Jour</th>
+                            <th>Titre Actuel</th>
+                            <th>Titre Suivant</th>
+                            <th>Durée</th>
+                            <th>Heure du Chevauchement</th> <!-- Nouvelle colonne pour l'heure de chevauchement -->
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+            <div id="resultsColumn2">
+                <h3>Trous détectés :</h3>
+                <table id="gapResultsTable">
+                    <thead>
+                        <tr>
+                            <th>Jour</th>
+                            <th>Titre Actuel</th>
+                            <th>Titre Suivant</th>
+                            <th>Durée</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+            <div>
+                <button class="comparebtn" onclick="window.location.href='compare.html'">Comparer avec la semaine modèle</button>
+            </div>
+        </div>
+    </div>
+    <!-- Fin de la section analyse XML -->
+
+    <footer>
+        <img class="footer" src="Logo_PrimeTimeXplorer.png">
+        Développé par Stéphane Mex. Tous droits réservés © 2024
+    </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.5/xlsx.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/exceljs/4.3.0/exceljs.min.js"></script>
+    <script src="app.js"></script>
+    <script src="excel_search.js"></script>
+    <script src="xml_search.js"></script>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PrimeTime Mailer</title>
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <div class="header-container">
+            <img src="Logo_PrimeTimeXplorer.png" alt="Logo PrimeTime Xplorer" class="logo">
+        </div>
+        <nav class="nav-buttons">
+            <a href="index.html" class="xplorer-nav-btn">Accueil - Xplorer</a>
+            <a href="compare.html" class="xplorer-nav-btn">Comparaison</a>
+            <a href="../PrimeTime-Hub/index.html" class="xplorer-nav-btn">Retour au Hub</a>
+        </nav>
+    </header>
+
+        <!-- Basculeur de thème -->
+        <div id="theme-toggle" class="theme-toggle">
+            <span class="sun">☀️</span>
+            <span class="moon">🌙</span>
+        </div>
+
+    <div class="compare_container">
+        <!-- Section de chargement des fichiers -->
+        <section>
+            <h2>Chargement des fichiers</h2>
+            <label for="modelFile" class="file-upload-label">Télécharger le Modèle XML</label>
+            <input type="file" id="modelFile" accept=".xml" style="display:none;">
+            <label for="weekFile" class="file-upload-label">Télécharger le Programme Semaine XML</label>
+            <input type="file" id="weekFile" accept=".xml" style="display:none;">
+        </section>
+
+        <!-- Section de gestion des mots-clés -->
+        <section class="recherche">
+            <h2>Mots-Clés à Rechercher pour l'analyse</h2>
+            <div id="keywordsContainer">
+                <!-- Les champs de mots-clés dynamiques seront ajoutés ici -->
+            </div>
+            <button onclick="addKeywordField()">Ajouter Mot-Clé</button>
+
+            <h2>Titres à Exclure de l'Analyse</h2>
+            <div id="excludedTitlesContainer">
+                <!-- Les champs de titres exclus seront ajoutés ici -->
+            </div>
+            <button onclick="addExcludedTitleField()">Ajouter un Titre à Exclure</button>
+            
+            <!-- Bouton pour lancer l'analyse -->
+            <div class="analysis-container">     
+                <button class="btn-analyze" onclick="analyzeFiles()">Analyser</button>
+                <button class="btn-reset" onclick="resetAll()">Réinitialiser</button>
+            </div>
+        </section>
+
+        <!-- Section d'analyse -->
+        <section>
+           <h2>Résultats de l'Analyse</h2>
+           <div class="analysis-results">
+              <div class="email-column">
+                  <div id="editableMail" contenteditable="true" class="editable-area"></div>
+              </div>
+           </div>
+        </section>
+    </div>
+
+
+
+    <!-- Footer Section -->
+    <footer>
+        <img src="Logo_PrimeTimeXplorer.png" alt="Logo PrimeTime Xplorer" class="footer">
+        Développé par Stéphane Mex. Tous droits réservés © 2024
+    </footer>
+
+    <script src="analyze.js"></script>
+</body>
+</html>
